@@ -94,3 +94,15 @@ Timestamp: Sat Oct 12 2019 11:19:20 GMT-0400 (Eastern Daylight Time)
 URL: /favicon.ico
 Timestamp: Sat Oct 12 2019 11:19:21 GMT-0400 (Eastern Daylight Time)
 
+URL: /
+Timestamp: Wed Nov 13 2019 11:54:05 GMT-0500 (Eastern Standard Time)
+
+URL: /favicon.ico
+Timestamp: Wed Nov 13 2019 11:54:06 GMT-0500 (Eastern Standard Time)
+
+URL: /documentation
+Timestamp: Wed Nov 13 2019 11:54:29 GMT-0500 (Eastern Standard Time)
+
+URL: /favicon.ico
+Timestamp: Wed Nov 13 2019 11:54:29 GMT-0500 (Eastern Standard Time)
+
