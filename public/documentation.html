@@ -1,2 +1,171 @@
-<h1>myFlix</h1>
-<h2>This is the documentation Page.</h2>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>myFlix App</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    />
+
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <!-- header -->
+    <nav class="navbar navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">myFlix App - Documentation</a>
+    </nav>
+
+    <p>
+      This is my movie app where the user can find information about movies.
+    </p>
+
+    <p>
+      The table below describes each endpoint of this API and how to access it.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>URL</th>
+          <th>HTTP method</th>
+          <th>Request body data format</th>
+          <th>Response body data format</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Get a list of all movies</td>
+          <td>/movies</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>
+            JSON object holding data about all movies. Structure:
+            <p>
+              { Title: "Titanic",year:"1997", Description: "A seventeen-year-old
+              aristocrat falls in love with a kind but poor artist aboard the
+              luxurious,ill-fated R.M.S Titanic.", Genre: {Name: "Romance",
+              Description: "romance is a narrative genre in literature that
+              involves a mysterious, adventurous, or spiritual story line where
+              the focus is on a quest that involves bravery and strong values,
+              not always a love interest". }, Director: {Name: "James Cameron",
+              Bio: "", Birth: "1954", Death: ""},
+              ImagePath:"https://www.imdb.com/title/tt0120338/mediaviewer/rm2647458304",
+              featured: "false"}
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>Get data about a single movie by title</td>
+          <td>/movies/[title]</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>
+            JSON object holding data about a single movie. Structure same as
+            above.
+          </td>
+        </tr>
+        <tr>
+          <td>Get data about a movie genre</td>
+          <td>/genre/[name]</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>
+            JSON object holding data about a movie genre, containing name and
+            description. Structure:
+            <p>
+              {Name: "Romance", Description: "romance is a narrative genre in
+              literature that involves a mysterious, adventurous, or spiritual
+              story line where the focus is on a quest that involves bravery and
+              strong values, not always a love interest."}
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>Get data about a director</td>
+          <td>/director/[name]</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>
+            JSON object holding data about a director. Structure:
+            <p>
+              {Name: "James Cameron", Bio: "", Birth: "1954", Death: ""}
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>Add a new user to the registry.</td>
+          <td>/users</td>
+          <td>POST</td>
+          <td>
+            JSON object holding data about the user to add. Structure:
+            <p>
+              {name: "Zion", username: "ziontarakan", password: "pw456", email:
+              "zion.tarakan@gmail.com", dateofbirth:
+              "10/19/2015",favoriteMovies: ["3"]}
+            </p>
+          </td>
+          <td>
+            JSON object holding data about the user that was add. Structure:
+            <p>
+              { id: 0 ,name:"Zion" ,username: "zion tarakan", password: "pw456",
+              email: "zion.tarakan@gmail.com", dateofbirth:
+              "10/19/2015",favoriteMovies: ["3"]}
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>Update a user's information</td>
+          <td>/users/[username]</td>
+          <td>PUT</td>
+          <td>
+            JSON object holding data about the user to add. Structure:
+            <p>
+              { name: "Zion",username: "zion tarakan", password: "pw456", email:
+              "zion.tarakan@gmail.com", dateofbirth:
+              "10/19/2015",favoriteMovies: ["3"]}
+            </p>
+          </td>
+          <td>A message indicating the user's information was updated.</td>
+        </tr>
+        <tr>
+          <td>Add a movie to the user's favorites list</td>
+          <td>/favorites/[username]/movies/[movieID]</td>
+          <td>POST</td>
+          <td>None</td>
+          <td>
+            A message indicating the movie title was added to the user's
+            favorites list.
+          </td>
+        </tr>
+        <tr>
+          <td>Delete a movie from the user's favorites list</td>
+          <td>/favorites/[username]/movies/[movieID]</td>
+          <td>DELETE</td>
+          <td>None</td>
+          <td>
+            A message indicating the movie title was deleted from the user's
+            favorites list.
+          </td>
+        </tr>
+        <tr>
+          <td>Remove a user from the registry.</td>
+          <td>/users/[username]</td>
+          <td>DELETE</td>
+          <td>None</td>
+          <td>A message indicating the user was removed from the registry.</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
