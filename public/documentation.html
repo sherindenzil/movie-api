@@ -120,27 +120,27 @@
             <p>
               { id: 0 ,name:"Zion" ,username: "zion tarakan", password: "pw456",
               email: "zion.tarakan@gmail.com", dateofbirth:
-              "10/19/2015",favoriteMovies: ["3"]}
+              "10/19/2015",favorites: ["3"]}
             </p>
           </td>
         </tr>
         <tr>
           <td>Update a user's information</td>
-          <td>/users/[username]</td>
+          <td>/users/[id]</td>
           <td>PUT</td>
           <td>
             JSON object holding data about the user to add. Structure:
             <p>
               { name: "Zion",username: "zion tarakan", password: "pw456", email:
-              "zion.tarakan@gmail.com", dateofbirth:
-              "10/19/2015",favoriteMovies: ["3"]}
+              "zion.tarakan@gmail.com", dateofbirth: "10/19/2015",favorites:
+              ["3"]}
             </p>
           </td>
           <td>A message indicating the user's information was updated.</td>
         </tr>
         <tr>
           <td>Add a movie to the user's favorites list</td>
-          <td>/favorites/[username]/movies/[movieID]</td>
+          <td>/favorites/[id]/movies/[movieID]</td>
           <td>POST</td>
           <td>None</td>
           <td>
@@ -150,7 +150,7 @@
         </tr>
         <tr>
           <td>Delete a movie from the user's favorites list</td>
-          <td>/favorites/[username]/movies/[movieID]</td>
+          <td>/favorites/[id]/movies/[movieID]</td>
           <td>DELETE</td>
           <td>None</td>
           <td>
@@ -160,7 +160,7 @@
         </tr>
         <tr>
           <td>Remove a user from the registry.</td>
-          <td>/users/[username]</td>
+          <td>/users/[id]</td>
           <td>DELETE</td>
           <td>None</td>
           <td>A message indicating the user was removed from the registry.</td>
