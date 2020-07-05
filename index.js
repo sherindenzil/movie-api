@@ -144,7 +144,7 @@ app.get("/Movies/:Title", (req, res) => {
 
 // Get the data about a single Genre, by name
 app.get("/genres/:name", (req, res) => {
-  Movies.findOne({ "Genre.Name": req.params.Name })
+  Movies.findOne({ "Genre.Name": req.params.name })
     .then(function (movie) {
       res.json(movie);
     })
@@ -158,7 +158,7 @@ app.get("/genres/:name", (req, res) => {
 
 // Get the data about a single Director, by name
 app.get("/directors/:name", (req, res) => {
-  Movies.findOne({ "Director.Name": req.params.Name })
+  Movies.findOne({ "Director.Name": req.params.name })
     .then(function (movies) {
       res.json(movies.Director);
     })
@@ -265,7 +265,7 @@ app.put("/users/:Username", (req, res) => {
 // -- List of Favorites --
 
 // add a favorite Movie to a User.
-app.post("/users/:Username/:movie_id", (req, res) => {
+app.post("/users/:Username/Movies/:MovieID", (req, res) => {
   Users.findOneAndUpdate(
     { Username: req.params.Username },
     {
