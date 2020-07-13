@@ -34,6 +34,8 @@ app.use(morgan("common"));
 app.use(bodyParser.json());
 app.use(cors());
 
+var allowedOrigins = ["http://localhost:1234", "*"];
+
 let auth = require("./auth")(app);
 
 app.get("/", function (req, res) {
