@@ -34,7 +34,7 @@ app.use(morgan("common"));
 app.use(bodyParser.json());
 app.use(cors());
 
-//var allowedOrigins = ["http://localhost:1234", "*"];
+var allowedOrigins = ["http://localhost:1234"];
 
 let auth = require("./auth")(app);
 
@@ -64,20 +64,16 @@ app.get("/documentation", function (req, res) {
 });
 
 // Get the data about a single Movie, by title
-app.get(
-  "/Movies/:Title",
-  passport.authenticate("jwt", { session: false }),
-  function (req, res) {
-    Movies.findOne({ Title: req.params.Title })
-      .then(function (movie) {
-        res.json(movie);
-      })
-      .catch(function (err) {
-        console.error(err);
-        res.status(500).send("Error: " + err);
-      });
-  }
-);
+app.get("/Movies/:Title", function (req, res) {
+  Movies.findOne({ Title: req.params.Title })
+    .then(function (movie) {
+      res.json(movie);
+    })
+    .catch(function (err) {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
 
 // -- Genres --
 
@@ -110,20 +106,16 @@ app.get("/directors/:name", (req, res) => {
 // -- Users --
 
 // Get the list of data about all users
-app.get(
-  "/users",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Users.find()
-      .then(function (users) {
-        res.status(200).json(users);
-      })
-      .catch(function (err) {
-        console.error(err);
-        res.status(500).send("Error: " + err);
-      });
-  }
-);
+app.get("/users", (req, res) => {
+  Users.find()
+    .then(function (users) {
+      res.status(200).json(users);
+    })
+    .catch(function (err) {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
 
 // Adds data for a new user to the list of Users.
 app.post(
