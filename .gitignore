@@ -2,3 +2,4 @@ node_modules/
 .DS_Store
 my-flix/.cache/
 my-flix/.DS_Store
+my-flix/client/.cache/

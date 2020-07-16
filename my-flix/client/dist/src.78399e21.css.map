@@ -1,1 +1,1 @@
-{"version":3,"sources":["index.scss"],"names":[],"mappings":"AAEA;EACE,OAHM","file":"src.78399e21.css","sourceRoot":"../src","sourcesContent":["$color: steelblue;\n\n.my-flix {\n  color: $color;\n}\n"]}
+{"version":3,"sources":["components/movie-view/movie-view.scss","index.scss"],"names":[],"mappings":"AAAA;EACE;EACA;EACA;;ACDF;EACE,OAHM","file":"src.78399e21.css","sourceRoot":"../src","sourcesContent":[".back-button {\n  color: red;\n  font: white;\n  text-align: left;\n}\n","$color: steelblue;\n\n.my-flix {\n  color: $color;\n}\n"]}
