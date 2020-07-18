@@ -35,11 +35,11 @@ export class MovieView extends React.Component {
           <span className="value">{movie.Director.Name}</span>
         </div>
 
-        <Link to={"/"}>
+        {/* <Link to={"/"}>
           <Button variant="primary" className="back-button">
             Back
           </Button>
-        </Link>
+        </Link> */}
       </div>
     );
   }
