@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import "./login-view.scss";
 
 export function LoginView(props) {
   const [username, setUsername] = useState("");
@@ -12,29 +16,67 @@ export function LoginView(props) {
   };
 
   return (
-    <form>
-      <label>
-        Username:
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </label>
-      <label>
-        Password:
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </label>
-      <button type="button" onClick={handleSubmit}>
-        Submit
-      </button>
-    </form>
+    <Container className="loginContainer">
+      <h1>Welcome to My Flix</h1>
+      <br></br>
+      <br></br>
+      <Form className="">
+        <Form.Group controlId="formBasicUsername">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Group>
+        <Button id="loginButton" onClick={handleSubmit}>
+          Log in
+        </Button>
+        {/* <Link to={`/register`}>
+          <Button variant="link" className="registerButton" type="submit">
+            Sign Up
+          </Button>
+        </Link> */}
+      </Form>
+    </Container>
   );
 }
+
+//   return (
+//     <form>
+//       <label>
+//         Username:
+//         <input
+//           type="text"
+//           value={username}
+//           onChange={(e) => setUsername(e.target.value)}
+//         />
+//       </label>
+//       <label>
+//         Password:
+//         <input
+//           type="password"
+//           value={password}
+//           onChange={(e) => setPassword(e.target.value)}
+//         />
+//       </label>
+//       <button type="button" onClick={handleSubmit}>
+//         Submit
+//       </button>
+//     </form>
+//   );
+// }
 
 // import React from "react";
 
