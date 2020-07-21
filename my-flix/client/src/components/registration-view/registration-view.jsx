@@ -14,21 +14,8 @@ export function RegistrationView(props) {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    axios
-      .post("https://sherin-careerfoundry.herokuapp.com//users", {
-        Username: username,
-        Password: password,
-        Email: email,
-        Birthday: dob,
-      })
-      .then((response) => {
-        const data = response.data;
-        console.log(data);
-        window.open("/", "_self");
-      })
-      .catch((e) => {
-        console.log("error registering the user");
-      });
+    console.log(username, password);
+    props.onNewUserRegistered(username);
   };
 
   return (
