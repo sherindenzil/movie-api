@@ -20,7 +20,7 @@ export function LoginView(props) {
       <h1>Welcome to My Flix</h1>
       <br></br>
       <br></br>
-      <Form className="">
+      <Form>
         <Form.Group controlId="formBasicUsername">
           <Form.Label>Username</Form.Label>
           <Form.Control
@@ -43,11 +43,14 @@ export function LoginView(props) {
         <Button id="loginButton" onClick={handleSubmit}>
           Log in
         </Button>
-        {/* <Link to={`/register`}>
-          <Button variant="link" className="registerButton" type="submit">
-            Sign Up
-          </Button>
-        </Link> */}
+        <Button
+          variant="link"
+          onclick={handleRegister}
+          className="registerButton"
+          type="submit"
+        >
+          Register
+        </Button>
       </Form>
     </Container>
   );
