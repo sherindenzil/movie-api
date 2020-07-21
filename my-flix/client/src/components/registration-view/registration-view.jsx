@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
-import axios from "axios";
+// import axios from "axios";
 import "./registration-view.scss";
 
 export function RegistrationView(props) {
@@ -14,8 +14,8 @@ export function RegistrationView(props) {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    console.log(username, password);
-    props.onNewUserRegistered(username);
+    console.log(username, password, email, dob);
+    props.onLoggedIn(username);
   };
 
   return (
@@ -76,7 +76,8 @@ export function RegistrationView(props) {
   );
 }
 
-RegistrationView.propTypes = {
-  onSignedIn: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired,
-};
+// RegistrationView.propTypes = {
+//   onSignedIn: PropTypes.func.isRequired,
+//   onClick: PropTypes.func.isRequired,
+// };
+//
