@@ -37,11 +37,11 @@ export class MainView extends React.Component {
       selectedMovie: movie,
     });
   }
-  onNewUserRegistered(user) {
-    this.setState({
-      user,
-    });
-  }
+  // onNewUserRegistered(user) {
+  //this.setState({
+  //  user,
+  // });
+  //}
 
   onLoggedIn(user) {
     this.setState({
