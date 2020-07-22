@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+
+import axios from "axios";
 import "./login-view.scss";
 
 export function LoginView(props) {
@@ -10,9 +12,19 @@ export function LoginView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password);
-    /* Send a request to the server for authentication then call */
-    props.onLoggedIn(username);
+    /* Send a request to the server for authentication */
+    axios
+      .post("https://sherin-careerfoundry.herokuapp.com/login", {
+        Username: username,
+        Password: password,
+      })
+      .then((response) => {
+        const data = response.data;
+        props.onLoggedIn(data);
+      })
+      .catch((e) => {
+        console.log("no such user");
+      });
   };
 
   return (
