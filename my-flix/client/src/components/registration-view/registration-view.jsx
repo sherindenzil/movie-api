@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
-// import axios from "axios";
+import axios from "axios";
 import "./registration-view.scss";
 
 export function RegistrationView(props) {
@@ -14,8 +14,21 @@ export function RegistrationView(props) {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    console.log(username, password, email, dob);
-    props.onLoggedIn(username);
+    axios
+      .post("https://sherin-careerfoundry.herokuapp.com/users", {
+        Username: username,
+        Password: password,
+        Email: email,
+        Birthday: dob,
+      })
+      .then((response) => {
+        const data = response.data;
+        console.log(data);
+        window.open("/", "_self"); // the second argument '_self' is necessary so that the page will open in the current tab
+      })
+      .catch((e) => {
+        console.log("error registering the user");
+      });
   };
 
   return (
