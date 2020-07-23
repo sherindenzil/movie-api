@@ -34,9 +34,9 @@ app.use(morgan("common"));
 app.use(bodyParser.json());
 app.use(cors());
 
-//var allowedOrigins = ["http://localhost:8080", "*"];
+var allowedOrigins = ["http://localhost:1234", "*"];
 
-var allowedOrigins = ["http://localhost:8080", "http://localhost:1234"];
+//var allowedOrigins = ["http://localhost:8080", "http://localhost:1234"];
 
 let auth = require("./auth")(app);
 
