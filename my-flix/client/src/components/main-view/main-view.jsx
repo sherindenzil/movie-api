@@ -10,6 +10,9 @@ import { RegistrationView } from "../registration-view/registration-view";
 import { LoginView } from "../login-view/login-view";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
+import { DirectorView } from "../director-view/director-view";
+import { GenreView } from "../genre-view/genre-view";
+import { ProfileView } from "../profile-view/profile-view";
 
 export class MainView extends React.Component {
   constructor() {
@@ -47,22 +50,6 @@ export class MainView extends React.Component {
       this.getMovies(accessToken);
     }
   }
-
-  // old code
-  //   axios
-  //     .get("https://sherin-careerfoundry.herokuapp.com/movies")
-  //     .then((response) => {
-  //       // Assign the result to the state
-  //       this.setState({
-  //         movies: response.data,
-  //       });
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // }
-
-  //
 
   onLoggedIn(authData) {
     console.log(authData);
@@ -138,6 +125,39 @@ export class MainView extends React.Component {
                 movie={movies.find((m) => m._id === match.params.movieId)}
               />
             )}
+          />
+          <Route
+            path="/movies/director/:name"
+            render={({ match }) => {
+              if (!movies) return <div className="main-view" />;
+              return (
+                <DirectorView
+                  director={
+                    movies.find((m) => m.Director.Name === match.params.name)
+                      .Director
+                  }
+                />
+              );
+            }}
+          />
+          <Route
+            path="/movies/genres/:name"
+            render={({ match }) => {
+              if (!movies) return <div className="main-view" />;
+              return (
+                <GenreView
+                  genre={
+                    movies.find((m) => m.Genre.Name === match.params.name).Genre
+                  }
+                />
+              );
+            }}
+          />
+
+          <Route
+            exact
+            path="/user"
+            render={() => <ProfileView movies={movies} />}
           />
         </div>
       </Router>
