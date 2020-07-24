@@ -41,6 +41,16 @@ export class MainView extends React.Component {
   }
 
   //   // One of the "hooks" available in a React Component
+
+  // componentDidMount() {
+  //   let accessToken = localStorage.getItem("token");
+  //   if (accessToken !== null) {
+  //     this.setState({
+  //       user: localStorage.getItem("user"),
+  //     });
+  //     this.getMovies(accessToken);
+  //   }
+  // }
   componentDidMount() {
     let accessToken = localStorage.getItem("token");
     if (accessToken !== null) {
@@ -126,6 +136,20 @@ export class MainView extends React.Component {
               />
             )}
           />
+
+          <Route
+            path="/movies/genres/:name"
+            render={({ match }) => {
+              if (!movies) return <div className="main-view" />;
+              return (
+                <GenreView
+                  genre={
+                    movies.find((m) => m.Genre.Name === match.params.name).Genre
+                  }
+                />
+              );
+            }}
+          />
           <Route
             path="/movies/director/:name"
             render={({ match }) => {
@@ -135,19 +159,6 @@ export class MainView extends React.Component {
                   director={
                     movies.find((m) => m.Director.Name === match.params.name)
                       .Director
-                  }
-                />
-              );
-            }}
-          />
-          <Route
-            path="/movies/genres/:name"
-            render={({ match }) => {
-              if (!movies) return <div className="main-view" />;
-              return (
-                <GenreView
-                  genre={
-                    movies.find((m) => m.Genre.Name === match.params.name).Genre
                   }
                 />
               );
