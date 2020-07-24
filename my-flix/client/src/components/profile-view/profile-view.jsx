@@ -32,7 +32,7 @@ export class ProfileView extends React.Component {
     const username = localStorage.getItem("user");
 
     axios
-      .get(`https://myflix16.herokuapp.com/users/${username}`, {
+      .get(`https://sherin-careerfoundry.herokuapp.com/users/${username}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
 
@@ -54,7 +54,7 @@ export class ProfileView extends React.Component {
     console.log(this.props.movies);
     axios
       .delete(
-        `https://myflix16.herokuapp.com/users/${localStorage.getItem(
+        `https://sherin-careerfoundry.herokuapp.com/users/${localStorage.getItem(
           "user"
         )}/Movies/${movieId}`,
         {
@@ -72,7 +72,9 @@ export class ProfileView extends React.Component {
   deleteUser(e) {
     axios
       .delete(
-        `https://myflix16.herokuapp.com/users/${localStorage.getItem("user")}`,
+        `https://sherin-careerfoundry.herokuapp.com/users/${localStorage.getItem(
+          "user"
+        )}`,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
