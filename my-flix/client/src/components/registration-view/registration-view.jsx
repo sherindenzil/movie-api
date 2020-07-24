@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-//import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
-import "./registration-view.scss";
 
 export function RegistrationView(props) {
   const [email, setemail] = useState("");
@@ -24,7 +23,7 @@ export function RegistrationView(props) {
       .then((response) => {
         const data = response.data;
         console.log(data);
-        window.open("/", "_self"); // the second argument '_self' is necessary so that the page will open in the current tab
+        window.open("/", "_self");
       })
       .catch((e) => {
         console.log("error registering the user");
@@ -36,7 +35,7 @@ export function RegistrationView(props) {
       <h1>Register User</h1>
       <br />
       <br />
-      <Form className="registration-form">
+      <Form>
         <Form.Group controlId="formBasicUsername">
           <Form.Label>Username</Form.Label>
           <Form.Control
@@ -76,21 +75,10 @@ export function RegistrationView(props) {
           />
         </Form.Group>
 
-        <Button
-          className="button-main"
-          variant="primary"
-          type="submit"
-          onClick={handleRegister}
-        >
+        <Button variant="primary" type="submit" onClick={handleRegister}>
           Register
         </Button>
       </Form>
     </Container>
   );
 }
-
-// RegistrationView.propTypes = {
-//   onSignedIn: PropTypes.func.isRequired,
-//   onClick: PropTypes.func.isRequired,
-// };
-//
