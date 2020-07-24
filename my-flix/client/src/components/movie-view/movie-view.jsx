@@ -31,11 +31,10 @@ export class MovieView extends React.Component {
             <Link to={`/`}>
               <Button variant="link">Back</Button>
             </Link>
-            <Link to={`/directors/${movie.Director.Name}`}>
+            <Link to={`/movies/director/${movie.Director.Name}`}>
               <Button variant="link">Director</Button>
             </Link>
-
-            <Link to={`/genres/${movie.Genre.Name}`}>
+            <Link to={`/movies/genres/${movie.Genre.Name}`}>
               <Button variant="link">Genre</Button>
             </Link>
           </Card.Body>
