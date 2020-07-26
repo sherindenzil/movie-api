@@ -4,8 +4,14 @@ import { Button, Navbar, Nav } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
 
+import { connect } from "react-redux";
+
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
+import { setMovies, setLoggedInUser } from "../../actions/actions";
+
+// we haven't written this one yet
+import MoviesList from "../movies-list/movies-list";
 import { RegistrationView } from "../registration-view/registration-view";
 import { LoginView } from "../login-view/login-view";
 import { MovieCard } from "../movie-card/movie-card";
@@ -13,13 +19,13 @@ import { MovieView } from "../movie-view/movie-view";
 import { DirectorView } from "../director-view/director-view";
 import { GenreView } from "../genre-view/genre-view";
 import { ProfileView } from "../profile-view/profile-view";
+import { UpdateProfile } from "../update-profile/update-profile";
 
 export class MainView extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      movies: [],
       user: null,
     };
   }
@@ -31,9 +37,7 @@ export class MainView extends React.Component {
       })
       .then((response) => {
         // Assign the result to the state
-        this.setState({
-          movies: response.data,
-        });
+        this.props.setMovies(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -82,15 +86,18 @@ export class MainView extends React.Component {
   }
 
   render() {
+    let { movies } = this.props;
+    let { user } = this.state;
+
     //     // If the state isn't initialized, this will throw on runtime
     //     // before the data is initially loaded
-    const { movies, user } = this.state;
+    // const { movies, user } = this.state;
 
     //     // Before the movies have been loaded
-    if (!movies) return <div className="main-view" />;
+    //if (!movies) return <div className="main-view" />;
 
     return (
-      <Router>
+      <Router basename="/client">
         <Navbar bg="light" expand="lg">
           <Navbar.Brand as={Link} to="/">
             <h1>My Flix</h1>
@@ -170,8 +177,17 @@ export class MainView extends React.Component {
             path="/user"
             render={() => <ProfileView movies={movies} />}
           />
+          <Route path="/user/update" render={() => <UpdateProfile />} />
         </div>
       </Router>
     );
   }
 }
+
+let mapStateToProps = (state) => {
+  return { movies: state.movies };
+};
+
+export default connect(mapStateToProps, { setMovies, setLoggedInUser })(
+  MainView
+);
