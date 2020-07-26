@@ -11,6 +11,7 @@ const mongoose = require("mongoose");
 const Models = require("./models.js");
 const Movies = Models.Movie;
 const Users = Models.User;
+const path = require("path");
 
 //mongoose.connect("mongodb://localhost:27017/myFlixDB", {
 // useNewUrlParser: true,
@@ -30,6 +31,10 @@ const app = express();
 
 // routes all requests for static files to 'public' folder
 app.use(express.static("public"));
+app.use("/client", express.static(path.join(__dirname, "client", "dist")));
+app.get("/client/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 app.use(morgan("common"));
 app.use(bodyParser.json());
 app.use(cors());
