@@ -3,7 +3,7 @@ $secondary-color: #595959;
 $font-stack: sans-serif;
 
 .loginContainer {
-  background-color: $primary-color;
+  background-color: red;
   border-radius: 4px;
   margin-top: 50px;
   font-family: sans-serif;
@@ -21,7 +21,7 @@ $font-stack: sans-serif;
   border-radius: 5px;
 }
 #loginButton:hover {
-  background-color: blue;
+  background-color: red;
 }
 
 .registerButton {
