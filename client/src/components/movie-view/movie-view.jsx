@@ -19,7 +19,7 @@ export class MovieView extends React.Component {
     if (!movie) return null;
 
     return (
-      <div className="moviecontainer">
+      <div>
         <Card style={{ width: "20rem" }}>
           <Card.Img variant="top" src={movie.ImagePath} />
           <Card.Body>
