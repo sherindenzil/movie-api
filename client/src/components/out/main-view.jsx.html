@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: main-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: main-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>//new code
+import React from "react";
+import axios from "axios";
+
+import { connect } from "react-redux";
+
+import { Button, Navbar, Nav } from "react-bootstrap";
+
+import { Link } from "react-router-dom";
+import Container from "react-bootstrap/Container";
+
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+import { setMovies, setLoggedInUser } from "../../actions/actions";
+
+import MoviesList from "../movies-list/movies-list";
+import { LoginView } from "../login-view/login-view";
+import { RegistrationView } from "../registration-view/registration-view";
+import { MovieView } from "../movie-view/movie-view";
+import { MovieCard } from "../movie-card/movie-card";
+import { DirectorView } from "../director-view/director-view";
+import { GenreView } from "../genre-view/genre-view";
+import { ProfileView } from "../profile-view/profile-view";
+import { UpdateProfile } from "../update-profile/update-profile";
+
+export class MainView extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      user: null,
+    };
+  }
+
+  componentDidMount() {
+    let accessToken = localStorage.getItem("token");
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem("user"),
+      });
+      this.getMovies(accessToken);
+    }
+  }
+
+  /**
+   * Loads all movies from database
+   * @function getMovies
+   * @axios
+   */
+
+  getMovies(token) {
+    axios
+      .get("https://sherin-careerfoundry.herokuapp.com/movies", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        this.props.setMovies(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  /**
+   * Saves logged user credentials in localStorage
+   * @function onLoggedIn
+   */
+
+  onLoggedIn(authData) {
+    console.log(authData);
+    this.setState({ user: authData.user.Username });
+
+    localStorage.setItem("token", authData.token);
+    localStorage.setItem("user", authData.user.Username);
+    this.getMovies(authData.token);
+  }
+
+  /**
+   * Logs the user out
+   * @function logout
+   */
+
+  onLogout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    this.setState({
+      user: null,
+    });
+    window.open("/client", "_self");
+  }
+
+  render() {
+    let { movies } = this.props;
+    let { user } = this.state;
+
+    return (
+      &lt;Router basename="/client">
+        &lt;Navbar bg="light" expand="lg">
+          &lt;Navbar.Brand as={Link} to="/">
+            &lt;h1>My Flix&lt;/h1>
+          &lt;/Navbar.Brand>
+          &lt;Navbar.Toggle aria-controls="basic-navbar-nav" />
+          &lt;Navbar.Collapse id="basic-navbar-nav">
+            &lt;Nav className="mr-auto">
+              &lt;Nav.Link as={Link} to="/">
+                &lt;h3>Home&lt;/h3>
+              &lt;/Nav.Link>
+              &lt;Nav.Link as={Link} to="/user">
+                &lt;h3>Profile&lt;/h3>
+              &lt;/Nav.Link>
+              &lt;Button variant="link" onClick={() => this.onLogout()}>
+                &lt;b>Log Out&lt;/b>
+              &lt;/Button>
+            &lt;/Nav>
+          &lt;/Navbar.Collapse>
+        &lt;/Navbar>
+        &lt;br>&lt;/br>
+        &lt;br>&lt;/br>
+        &lt;br>&lt;/br>
+        &lt;div className="main-view">
+          &lt;Container>
+            &lt;Route
+              exact
+              path="/"
+              render={() => {
+                if (!user)
+                  return (
+                    &lt;LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
+                  );
+                return &lt;MoviesList movies={movies} />;
+              }}
+            />
+
+            &lt;Route path="/register" render={() => &lt;RegistrationView />} />
+
+            &lt;Route
+              path="/movies/:movieId"
+              render={({ match }) => (
+                &lt;MovieView
+                  movie={movies.find((m) => m._id === match.params.movieId)}
+                />
+              )}
+            />
+            &lt;Route
+              path="/movies/director/:name"
+              render={({ match }) => {
+                if (!movies) return &lt;div className="main-view" />;
+                return (
+                  &lt;DirectorView
+                    director={
+                      movies.find((m) => m.Director.Name === match.params.name)
+                        .Director
+                    }
+                  />
+                );
+              }}
+            />
+            &lt;Route
+              path="/movies/genres/:name"
+              render={({ match }) => {
+                if (!movies) return &lt;div className="main-view" />;
+                return (
+                  &lt;GenreView
+                    genre={
+                      movies.find((m) => m.Genre.Name === match.params.name)
+                        .Genre
+                    }
+                  />
+                );
+              }}
+            />
+
+            &lt;Route
+              exact
+              path="/user"
+              render={() => &lt;ProfileView movies={movies} />}
+            />
+            &lt;Route path="/user/update" render={() => &lt;UpdateProfile />} />
+          &lt;/Container>
+        &lt;/div>
+      &lt;/Router>
+    );
+  }
+}
+let mapStateToProps = (state) => {
+  return { movies: state.movies };
+};
+export default connect(mapStateToProps, { setMovies, setLoggedInUser })(
+  MainView
+);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#getMovies">getMovies</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#onLoggedIn">onLoggedIn</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Wed Sep 23 2020 14:18:19 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
